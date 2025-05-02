@@ -1,0 +1,53 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: user-v1
+
+  r2dbc:
+    url: r2dbc:sqlserver://${SQL_SERVER_DOMAIN}:1433/${DATABASE_NAME}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+
+  datasource:
+    url: jdbc:sqlserver://${SQL_SERVER_DOMAIN}:1433;database=${DATABASE_NAME};columnEncryptionSetting=Enabled;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: transactions-pool
+      auto-commit: false
+      connection-timeout: 25000
+      idle-timeout: 10000
+      maximum-pool-size: 10
+      leak-detection-threshold: 20000
+
+azure:
+  keyvault:
+    enabled: true
+    uri: https://${KEY_VAULT_SERVER_DOMAIN}/
+    client-id: ${KEY_VAULT_CLIENT_ID}
+    client-secret: ${KEY_VAULT_CLIENT_SECRET}
+    token-acquire-timeout-seconds: 60
+
+configuration:
+  error-messages:
+    Default: No hemos podido realizar tu operación. Estamos trabajando para solucionar el inconveniente.
+
+# actuator endpoints
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus, beans, env, loggers, flyway
+  endpoint:
+    health:
+      show-details: always
+      probes: #livess & readiness probe
+        enabled: true
+
