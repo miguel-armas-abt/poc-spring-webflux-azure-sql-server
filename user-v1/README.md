@@ -22,7 +22,7 @@ mvn clean install
 
 ⚙️ Crear imagen
 ```shell
-docker build -t miguelarmasabt/user:v1.0.1 -f ./Dockerfile ./user-v1
+docker build -t miguelarmasabt/user:v1.0.1 -f ./Dockerfile .
 ```
 
 ⚙️ Ejecutar contenedor
@@ -37,7 +37,7 @@ docker run --rm -p 8080:8080 --env-file ./variables.env --name user-v1  miguelar
 ⚙️ Crear imagen
 ```shell
 eval $(minikube docker-env --shell bash)
-docker build -t miguelarmasabt/user:v1.0.1 -f ./Dockerfile ./user-v1
+docker build -t miguelarmasabt/user:v1.0.1 -f ./Dockerfile .
 ```
 
 ⚙️ Crear namespace y aplicar manifiestos
