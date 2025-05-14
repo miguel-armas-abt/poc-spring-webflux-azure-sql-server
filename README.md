@@ -10,6 +10,11 @@ A la fecha 05/2025, `r2dbc-mssql` no tiene soporte para la integración con Azur
 
 ---
 
+## 🧩 Prerrequisitos
+Es necesario tener una suscripción en Microsoft Azure y crear los recursos Azure SQL Server y Azure Key Vault.
+
+---
+
 ## 📦 [user-v1](user-v1/README.md)
 - Consulta de usuario.
 - La solución aplica un enfoque híbrido. Se aprovecha el pool reactivo de `r2dbc` para las lecturas ligeras (IDs, metadatos) y con `jdbc` se resuelven los campos Always Encrypted.
